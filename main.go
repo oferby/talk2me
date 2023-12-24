@@ -6,7 +6,8 @@ import (
     "github.com/chzyer/readline"
 )
 
-
+// getServerName returns a slice of readline.PrefixCompleterInterface
+// that represents the available server names for auto-completion.
 func getServerName() []readline.PrefixCompleterInterface {
 	return []readline.PrefixCompleterInterface{
 		readline.PcItem("server1"),
@@ -15,12 +16,8 @@ func getServerName() []readline.PrefixCompleterInterface {
 	}
 }
 
-
-
 var completer = readline.NewPrefixCompleter(
-    readline.PcItem("server",
-	getServerName()...
-),
+    readline.PcItem("server", getServerName()...),
     readline.PcItem("command2"),
     readline.PcItem("show",
 		readline.PcItem("config"),
@@ -29,6 +26,9 @@ var completer = readline.NewPrefixCompleter(
 	readline.PcItem("exit"),
 )
 
+// main is the entry point of the program.
+// It initializes the readline library, sets up auto-completion,
+// and reads user input until the user enters "exit".
 func main() {
     rl, err := readline.NewEx(&readline.Config{
         Prompt:          "prompt> ",
@@ -53,6 +53,5 @@ func main() {
         if line == "exit" {
             os.Exit(0)
         }
-        
     }
 }
